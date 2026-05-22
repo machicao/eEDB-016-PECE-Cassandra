@@ -12,8 +12,22 @@ Devido à aquisição da **DataStax pela IBM** em outubro de 2025, a infraestrut
 *   **Gitpods DataStaxDevs (Atualização de Maio/2026):** Os ambientes sandbox baseados em Gitpod agora exigem a vinculação de um cartão de crédito para execução (modelo pago).
 
 ---
+## Casos de Estudo
+Como alternativa confiável, utilize os **repositórios originais do GitHub** listados abaixo para clonar os esquemas e rodar localmente ou em seu próprio cluster Cassandra.
 
-## 📁 Organização dos Casos de Estudo
+| Domínio de Negócio | Link Neste Repositório (Local) | GitHub Original (Referência) |
+| :--- | :--- | :--- |
+| 📟 **1. Sensor Data (IoT)** | [1data-modeling-sensor-data](./1data-modeling-sensor-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-sensor-data) |
+| 💬 **2. Messaging Data** | [2data-modeling-messaging-data](./2data-modeling-messaging-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-messaging-data) |
+| 🎵 **3. Music Data** | [3data-modeling-music-data](./3data-modeling-music-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-music-data) |
+| 📈 **4. Investment Data** | [4data-modeling-investment-data](./4data-modeling-investment-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-investment-data) |
+| ⏱️ **5. Time Series Data** | [5data-modeling-time-series-data](./5data-modeling-time-series-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-time-series-data) |
+| 🛒 **6. Shopping Cart** | [6data-modeling-shopping-cart-data](./6data-modeling-shopping-cart-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-shopping-cart-data) |
+| 📦 **7. Order Management** | [7data-modeling-order-management-data](./7data-modeling-order-management-data) | [DataStax Academy](https://github.com/DataStax-Academy/data-modeling-order-management-data) |
+
+
+---
+## 📁 Organização das pastas
 
 Como estes projetos foram unificados neste repositório, cada domínio de negócio está estruturado de forma padronizada. A arquitetura de pastas e arquivos segue o modelo abaixo:
 Cada repositório contém os esquemas CQL, explicações conceituais e os fluxos de consultas (`Query-First Approach`)
@@ -28,21 +42,4 @@ Cada repositório contém os esquemas CQL, explicações conceituais e os fluxos
 └── 📝 step-3.md            # Instruções e validação das consultas (Queries)
 └── 📝 step-N.md            # Instruções ..
 ```
-Como alternativa confiável, utilize os **repositórios originais do GitHub** listados abaixo para clonar os esquemas e rodar localmente ou em seu próprio cluster Cassandra.
-
-
---- 
-## 📚 Repositórios de Modelagem por Exemplo (DataStax Academy)
-
-Abaixo estão os links originais para os cenários práticos de modelagem de dados.
-
-| Domínio de Negócio | Link do Repositório GitHub |
-| :--- | :--- |
-| 🛒 **Shopping Cart** | [data-modeling-shopping-cart-data](https://github.com/DataStax-Academy/data-modeling-shopping-cart-data) |
-| 📦 **Order Management** | [data-modeling-order-management-data](https://github.com/DataStax-Academy/data-modeling-order-management-data) |
-| 🎵 **Music Data** | [data-modeling-music-data](https://github.com/DataStax-Academy/data-modeling-music-data) |
-| 📟 **Sensor Data (IoT)** | [data-modeling-sensor-data](https://github.com/DataStax-Academy/data-modeling-sensor-data) |
-| 💬 **Messaging Data** | [data-modeling-messaging-data](https://github.com/DataStax-Academy/data-modeling-messaging-data) |
-| 📈 **Investment Data** | [data-modeling-investment-data](https://github.com/DataStax-Academy/data-modeling-investment-data) |
-| ⏱️ **Time Series Data** | [data-modeling-time-series-data](https://github.com/DataStax-Academy/data-modeling-time-series-data) |
 
