@@ -1,0 +1,102 @@
+services:
+  cassandra-node1:
+    image: cassandra:5.0
+    container_name: cassandra_node1
+    hostname: cassandra-node1
+    ports:
+      - "9042:9042"
+    environment:
+      CASSANDRA_CLUSTER_NAME: MeuCluster
+      CASSANDRA_DC: DC1
+      CASSANDRA_RACK: RACK1
+      CASSANDRA_SEEDS: cassandra-node1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      MAX_HEAP_SIZE: 512M
+      HEAP_NEWSIZE: 128M
+    volumes:
+      - cassandra_data1:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh 127.0.0.1 9042 -e 'DESCRIBE KEYSPACES' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+    networks:
+      - cassandra-net
+
+  cassandra-node2:
+    image: cassandra:5.0
+    container_name: cassandra_node2
+    hostname: cassandra-node2
+    environment:
+      CASSANDRA_CLUSTER_NAME: MeuCluster
+      CASSANDRA_DC: DC1
+      CASSANDRA_RACK: RACK1
+      CASSANDRA_SEEDS: cassandra-node1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      MAX_HEAP_SIZE: 512M
+      HEAP_NEWSIZE: 128M
+    volumes:
+      - cassandra_data2:/var/lib/cassandra
+    depends_on:
+      cassandra-node1:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh 127.0.0.1 9042 -e 'DESCRIBE KEYSPACES' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+    networks:
+      - cassandra-net
+
+  cassandra-node3:
+    image: cassandra:5.0
+    container_name: cassandra_node3
+    hostname: cassandra-node3
+    environment:
+      CASSANDRA_CLUSTER_NAME: MeuCluster
+      CASSANDRA_DC: DC1
+      CASSANDRA_RACK: RACK1
+      CASSANDRA_SEEDS: cassandra-node1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      MAX_HEAP_SIZE: 512M
+      HEAP_NEWSIZE: 128M
+    volumes:
+      - cassandra_data3:/var/lib/cassandra
+    depends_on:
+      cassandra-node2:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh 127.0.0.1 9042 -e 'DESCRIBE KEYSPACES' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 150s
+    networks:
+      - cassandra-net
+
+  dbgate:
+    image: dbgate/dbgate:latest
+    container_name: dbgate_ui
+    restart: unless-stopped
+    ports:
+      - "8080:3000"
+    volumes:
+      - dbgate_data:/root/.dbgate
+      - dbgate_plugins:/root/.dbgate/plugins
+    depends_on:
+      cassandra-node1
+    networks:
+      - cassandra-net
+
+volumes:
+  cassandra_data1:
+  cassandra_data2:
+  cassandra_data3:
+  dbgate_data:
+  dbgate_plugins:
+
+networks:
+  cassandra-net:
+    driver: bridge
